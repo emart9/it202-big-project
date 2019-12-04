@@ -12,10 +12,35 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         
         <style>
-            body {
-                margin : 0;
-            }    
+            h1 { color: black; font-family: Helvetica Neue; font-size: 300%; text-align: center;}
+            h2 { color: #686868; font-family: Helvetica Neue; font-size: 200%; text-align: center;}
+            p  { color: gold; font-family: Helvetica Neue; font-size: 100%; text-align: center;}
             
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: #F5F5F5;
+            }    
+            .content {
+			    display: none;
+			    margin: 1em;
+		    } 
+            .top_bar-container {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 50px;
+            }
+            .content-container {
+                text-align: center;
+                padding-top: 50px;
+            }
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 88%;
+            }
             :root {
                 --mdc-theme-primary: #303030;
                 --mdc-theme-secondary: #686868;
@@ -24,55 +49,55 @@
         
     </head>
     
-    <title>Chicago Crime</title>
+    <title>Chicago Crime Statistics</title>
     
-    <body>      
-        <!-- Model drawer -->
-         <aside class="mdc-drawer mdc-drawer--modal" data-mdc-auto-init="MDCDrawer">
-            <div class="mdc-drawer__content">
-                <nav class="mdc-list">
-                    <a class="mdc-list-item mdc-list-item--activated" href="#home" aria-current="page">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
-                        <span class="mdc-list-item__text">Home</span>
-                    </a>
-                    <a class="mdc-list-item" href="#table">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">view_list</i>
-                        <span class="mdc-list-item__text">Table of Results</span>
-                    </a>
-                    <a class="mdc-list-item" href="#map">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">map</i>
-                        <span class="mdc-list-item__text">Map</span>
-                    </a>
-                 </nav>
-             </div>
-         </aside>
+    <body> 
+        <div class="top_bar-container">
+            <!-- Model drawer -->
+             <aside class="mdc-drawer mdc-drawer--modal" data-mdc-auto-init="MDCDrawer">
+                <div class="mdc-drawer__content">
+                    <nav class="mdc-list">
+                        <a class="mdc-list-item mdc-list-item--activated" href="#home" aria-current="page">
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                            <span class="mdc-list-item__text">Home</span>
+                        </a>
+                        <a class="mdc-list-item" href="#table">
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">view_list</i>
+                            <span class="mdc-list-item__text">Table of Results</span>
+                        </a>
+                        <a class="mdc-list-item" href="#map">
+                            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">map</i>
+                            <span class="mdc-list-item__text">Map</span>
+                        </a>
+                     </nav>
+                 </div>
+             </aside>
 
-        <div class="mdc-drawer-scrim"></div> 
+            <div class="mdc-drawer-scrim"></div> 
+
+            <!-- Top Bar -->
+            <header class="mdc-top-app-bar">
+                <div class="mdc-top-app-bar__row">
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+                        <span class="mdc-top-app-bar__title">Chicago Crime Statistics</span>
+                    </section>
+                    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                        <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Info">info</button>
+                    </section>
+                </div>
+            </header>
+        </div>
         
-        <!-- Top Bar -->
-        <header class="mdc-top-app-bar">
-            <div class="mdc-top-app-bar__row">
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-                    <span class="mdc-top-app-bar__title">Chicago Crime Statistics</span>
-                </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Info">info</button>
-                </section>
+        <div class="content-container">
+            <!-- the content divs -->
+            <div class="content" id="home">
             </div>
-        </header> 
-        
-        
-        <!-- the content divs -->
-        <div class="content" id="home">
-            Home Screen
+            <div class="content" id="table">
+            </div>
+            <div class="content" id="map">
+            </div>  
         </div>
-        <div class="content" id="table">
-            Table screen 
-        </div>
-        <div class="content" id="map">
-            Map screen 
-        </div>  
         
         <!-- jQuery first, then Popper.js -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -89,7 +114,7 @@
         </script>
         
        
-       <script>
+        <script>
            window.mdc.autoInit();
            const drawer = document.querySelector('.mdc-drawer').MDCDrawer;
            
@@ -100,12 +125,11 @@
 
            // close drawer on selection
            let navs = document.getElementsByClassName("mdc-list-item");
-           
-//            $(document).ready(function() { 
-                function hideScreens() { 
-                    $(".content").hide(); 
-                } 
-
+            
+           function hideScreens() { 
+               $(".content").hide(); 
+           }
+            
            for (let i = 0; i < navs.length; i++) {
                navs[i].addEventListener("click", function() {
                    drawer.open = false;
@@ -113,9 +137,8 @@
                    var target = $(this).attr("href");
                    $(target).show();                   
                })
-           };
-               $("#home").show() 
-//            });
-       </script>   
+           }; 
+           $("#home").show()
+       </script>    
     </body>
 </html>
