@@ -13,12 +13,11 @@
     </div>
     <div class="picture-container">
         <button id="submitButton" class="mdc-button mdc-button--unelevated">  <span class="mdc-button__ripple"></span> GO</button>
-        <p>Chicago Wards</p>
-        <img src="./images/map.png" alt="Map of Chicago Wards" style="width:300px;height:400px;">
+        <p></p>
+        <img src="./images/wards.png" alt="Map of Chicago Wards" style="width:400px;height:500px;">
     </div>
     
     <script>
-//         const textField = new MDCTextField(document.querySelector('.mdc-text-field')); 
         // Handler for when button is clicked or enter is pressed             
         $(document).ready(function(){
             $("#submitButton").on("click", function(){
@@ -31,42 +30,9 @@
                     sessionStorage.setItem("endpoint",endpoint);
                     $(".content").hide();
                     $("#table").load("./pages/table.html");
-//                     $("#map").load("./pages/map.html");
+                     $("#map").load("./pages/map.html");
                     $("#table").show();
                 });     
-
-//                 // Check which category is selected  
-//                 for (var i = 0; i < categories.length; i++){
-//                     if(categories[i].checked) {
-//                         category = categories[i].value;
-//                     }
-//                 }
-
-//                 // Check the value of the checked box
-//                 if (document.getElementById('movieOccurred').checked) {                
-//                    // Upcoming movies            
-//                    var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?$where=date%20not%20between%20%272019-10-10T00:00:00%27%20and%20%272029-06-10T00:00:00%27";
-//                    $.get(endpoint,
-//                           function(response){  
-//                               sessionStorage.setItem("endpoint",endPoint);
-//                               $(".content").hide();
-//                               $("#display").load("./page_content/_display.html");
-//                               $("#map").load("./page_content/_map.html");
-//                               $("#display").show();
-//                     });     
-//                 } 
-//                 else {
-//                     // Past movies
-//                     var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput;
-//                     $.get(endpoint,
-//                           function(response){  
-//                               sessionStorage.setItem("endpoint",endPoint);
-//                               $(".content").hide();
-//                               $("#display").load("./page_content/_display.html");
-//                               $("#map").load("./page_content/_map.html");
-//                               $("#display").show();
-//                     });                
-//                 }
              });
         });
     </script> 

@@ -1,10 +1,11 @@
 <div class="map-container">
+    <p></p>
     <div id="map"></div>
         <script>
           function initMap() {
             var center = {lat:41.881832, lng:-87.623177};
             var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 10,
+              zoom: 11,
               center: center
             });
 
@@ -21,7 +22,7 @@
                     '<p><b>Date: </b>' + value.date + '</p>' +
                     '<p><b>Address: </b>' + value.block + '</p>' +
                     '<p><b>Arrested: </b>' + value.arrest + '</p>' +
-                    '<p><b>Arrested: </b>' + value.ward + '</p>' + 
+                    '<p><b>Ward: </b>' + value.ward + '</p>' + 
                     '</div>'+
                     '</div>';
                    var infowindow = new google.maps.InfoWindow({
