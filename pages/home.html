@@ -1,6 +1,6 @@
 <div class="home-container">
     <div class="search-container">
-        <h2>Search By Ward</h2>                
+        <h2>Search Crime By Ward</h2>                
         <!--  Search Box  -->
         <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
             <i class="material-icons mdc-text-field__icon">my_location</i>
@@ -9,16 +9,65 @@
                 <div class="mdc-notched-outline__leading"></div>
                 <div class="mdc-notched-outline__trailing"></div>
             </div>
-        </div>
-        
-        <script>
-//             const textField = new MDCTextField(document.querySelector('.mdc-text-field'));
-        </script>
-        
-        
+        </div>              
     </div>
     <div class="picture-container">
-        <p>Wards of Chicago</p>
-        <img src="./images/map.png" alt="Map of Chicago Wards" style="width:350px;height:450px;">
+        <button id="submitButton" class="mdc-button mdc-button--unelevated">  <span class="mdc-button__ripple"></span> GO</button>
+        <p>Chicago Wards</p>
+        <img src="./images/map.png" alt="Map of Chicago Wards" style="width:300px;height:400px;">
     </div>
+    
+    <script>
+//         const textField = new MDCTextField(document.querySelector('.mdc-text-field')); 
+        // Handler for when button is clicked or enter is pressed             
+        $(document).ready(function(){
+            $("#submitButton").on("click", function(){
+                var boxInput = document.getElementById('text-field-hero-input').value;
+                console.log(boxInput);
+                
+                var endpoint = "https://data.cityofchicago.org/resource/ijzp-q8t2.json?ward=" + boxInput;
+                
+                $.get(endpoint, function(response){  
+                    sessionStorage.setItem("endpoint",endpoint);
+                    $(".content").hide();
+                    $("#table").load("./pages/table.html");
+//                     $("#map").load("./pages/map.html");
+                    $("#table").show();
+                });     
+
+//                 // Check which category is selected  
+//                 for (var i = 0; i < categories.length; i++){
+//                     if(categories[i].checked) {
+//                         category = categories[i].value;
+//                     }
+//                 }
+
+//                 // Check the value of the checked box
+//                 if (document.getElementById('movieOccurred').checked) {                
+//                    // Upcoming movies            
+//                    var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?$where=date%20not%20between%20%272019-10-10T00:00:00%27%20and%20%272029-06-10T00:00:00%27";
+//                    $.get(endpoint,
+//                           function(response){  
+//                               sessionStorage.setItem("endpoint",endPoint);
+//                               $(".content").hide();
+//                               $("#display").load("./page_content/_display.html");
+//                               $("#map").load("./page_content/_map.html");
+//                               $("#display").show();
+//                     });     
+//                 } 
+//                 else {
+//                     // Past movies
+//                     var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput;
+//                     $.get(endpoint,
+//                           function(response){  
+//                               sessionStorage.setItem("endpoint",endPoint);
+//                               $(".content").hide();
+//                               $("#display").load("./page_content/_display.html");
+//                               $("#map").load("./page_content/_map.html");
+//                               $("#display").show();
+//                     });                
+//                 }
+             });
+        });
+    </script> 
 </div>

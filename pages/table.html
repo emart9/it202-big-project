@@ -1,0 +1,37 @@
+<div class="table-container">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Ward</th>
+          <th scope="col">Case Number</th>
+          <th scope="col">Crime Type</th>
+          <th scope="col">Date</th>
+          <th scope="col">Address</th>
+          <th scope="col">Arrested</th>
+          <th scope="col">Police District</th> 
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+        var endpoint = sessionStorage.getItem("endpoint");
+        $.getJSON(endpoint, function(data){
+
+            var items = [];
+
+            $.each(data, function(key, value){
+                items.push("<tr>");
+                items.push("<td id=''"+key+"''>"+value.ward+"</td>");
+                items.push("<td id=''"+key+"''>"+value.case_number+"</td>");
+                items.push("<td id=''"+key+"''>"+value.primary_type + ": " + value.description+"</td>");
+                items.push("<td id=''"+key+"''>"+value.date+"</td>");
+                items.push("<td id=''"+key+"''>"+value.block+"</td>");
+                items.push("<td id=''"+key+"''>"+value.arrest+"</td>");
+                items.push("<td id=''"+key+"''>"+value.district+"</td>");
+                items.push("</tr>");            
+            }); 
+            $("<tbody/>", {html: items.join("")}).appendTo("table");
+        });
+    </script> 
+</div>
